@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="p1_color">@android:color/holo_blue_dark</color>
+    <color name="p2_color">@android:color/holo_red_dark</color>
+</resources>

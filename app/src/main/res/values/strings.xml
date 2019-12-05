@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Tic-Tac-Toe</string>
+    <string name="main_title">Tic-Tac-Toe Battle!</string>
+    <string name="btn_fight">Fight!</string>
+    <string name="left_up_block">left_up_block</string>
+    <string name="mid_up_block">mid_up_block</string>
+    <string name="right_up_block">right_up_block</string>
+    <string name="left_mid_block">left_mid_block</string>
+    <string name="mid_mid_block">mid_mid_block</string>
+    <string name="right_mid_block">right_mid_block</string>
+    <string name="left_down_block">left_down_block</string>
+    <string name="mid_down_block">mid_down_block</string>
+    <string name="right_down_block">right_down_block</string>
+    <string name="your_turn">Your Turn!</string>
+    <string name="btn_put_here">PUT HERE</string>
+    <string name="btn_restart">RESTART</string>
+    <string name="btn_leave">LEAVE</string>
+    <string name="player_1">Player 1</string>
+    <string name="player_2">Player 2</string>
+</resources>
