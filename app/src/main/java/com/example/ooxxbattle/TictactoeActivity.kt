@@ -1,7 +1,9 @@
 package com.example.ooxxbattle
 
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -15,39 +17,24 @@ class TictactoeActivity : AppCompatActivity(), View.OnClickListener {
     var player1: String? = null
     var player2: String? = null
 
-    override fun onClick(v: View) {
-        val clickedId = v.id
-        when(clickedId) {
-            btn_restart.id -> Toast.makeText(this, "Restart: Not implemented", Toast.LENGTH_SHORT).show()
-            btn_leave.id -> Toast.makeText(this, "Leave: Not implemented", Toast.LENGTH_SHORT).show()
-            btn_confirm.id -> {
-                lastClicked?.setBackgroundResource(android.R.drawable.btn_default)
-
-                if(currentPlayer == 1) {
-                    currentPlayer = 2
-                    player2?.let { changeTitle(currentPlayer, it) }
-                }
-                else {
-                    currentPlayer = 1
-                    player1?.let { changeTitle(currentPlayer, it) }
-                }
-            }
-
-            else -> {
-                lastClicked?.setBackgroundResource(android.R.drawable.btn_default)
-                if(currentPlayer == 1)
-                    v.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.p1_color))
-                else
-                    v.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.p2_color))
-                lastClicked = v
-            }
-        }
-
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tictactoe)
+
+        getInfo()
+        initButtons()
+        chooseStarter()
+
+    }
+
+    private fun getInfo() {
+        intent?.extras?.let {
+            player1 = it.getString("p1_name")
+            player2 = it.getString("p2_name")
+        }
+    }
+
+    private fun initButtons() {
         btn_confirm.setOnClickListener(this)
         btn_restart.setOnClickListener(this)
         btn_leave.setOnClickListener(this)
@@ -60,19 +47,14 @@ class TictactoeActivity : AppCompatActivity(), View.OnClickListener {
         btn_ru.setOnClickListener(this)
         btn_rm.setOnClickListener(this)
         btn_rd.setOnClickListener(this)
+    }
 
-        intent?.extras?.let {
-            player1 = it.getString("p1_name")
-            player2 = it.getString("p2_name")
-
-            if(currentPlayer == 1 && player1 != null) {
-                changeTitle(currentPlayer, player1!!)
-            }
-            else if(player2 != null) {
-                changeTitle(currentPlayer, player2!!)
-            }
-
-
+    private fun chooseStarter() {
+        if(currentPlayer == 1 && player1 != null) {
+            changeTitle(currentPlayer, player1!!)
+        }
+        else if(player2 != null) {
+            changeTitle(currentPlayer, player2!!)
         }
     }
 
@@ -89,6 +71,36 @@ class TictactoeActivity : AppCompatActivity(), View.OnClickListener {
         else {
             topMessage.setTextColor(ContextCompat.getColor(applicationContext, R.color.p2_color))
             yt.setTextColor(ContextCompat.getColor(applicationContext, R.color.p2_color))
+        }
+    }
+
+    override fun onClick(v: View) {
+        val clickedId = v.id
+        when(clickedId) {
+            btn_restart.id -> Toast.makeText(this, "Restart: Not implemented", Toast.LENGTH_SHORT).show()
+            btn_leave.id -> Toast.makeText(this, "Leave: Not implemented", Toast.LENGTH_SHORT).show()
+            btn_confirm.id -> {
+
+                lastClicked?.setBackgroundResource(android.R.drawable.btn_default)
+                if(currentPlayer == 1) {
+                    (lastClicked as Button).text = "O"
+                    currentPlayer = 2
+                    player2?.let { changeTitle(currentPlayer, it) }
+                }
+                else {
+                    (lastClicked as Button).text = "X"
+                    currentPlayer = 1
+                    player1?.let { changeTitle(currentPlayer, it) }
+                }
+            }
+            else -> {
+                lastClicked?.setBackgroundResource(android.R.drawable.btn_default)
+                if(currentPlayer == 1)
+                    v.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.p1_color))
+                else
+                    v.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.p2_color))
+                lastClicked = v
+            }
         }
     }
 }
